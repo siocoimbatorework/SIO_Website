@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SIO Students Islamic Organisation</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+html{color-scheme:light}body{margin:0}
+
+/* Layout concept: the flag's three bands (sky, white, coral) organise the page; the logo's deep green carries text, buttons and links. */
+:root{
+  --sky:#6EC1FF; --sky-soft:#E6F4FF; --coral:#FF4D41; --coral-soft:#FFE9E6;
+  --green:#14591F; --green-ink:#14591F;
+  --bg:#FFFFFF; --bg-alt:#F3F9FE; --card:#FFFFFF; --fg:#10241A; --muted:#4A5E55; --line:#D5E4EE;
+  --on-green:#FFFFFF; --on-sky:#0B2233; --on-coral:#2B0A07;
+  --font-display:"Fraunces",Georgia,"Times New Roman",serif;
+  --font-body:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1A22; --bg-alt:#122430; --card:#16293A; --fg:#EAF3F8; --muted:#A9BDC9; --line:#26404F;
+    --green-ink:#8EDB9A; --sky-soft:#173449; --coral-soft:#3A1E21; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1A22; --bg-alt:#122430; --card:#16293A; --fg:#EAF3F8; --muted:#A9BDC9; --line:#26404F;
+  --green-ink:#8EDB9A; --sky-soft:#173449; --coral-soft:#3A1E21; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;margin:0;text-wrap:balance;font-weight:800}
+h2{font-size:clamp(1.9rem,4vw,2.7rem)} h3{font-size:1.3rem;font-weight:600} h4{font-size:1.05rem;font-weight:600}
+p{margin:0;max-width:65ch}
+a{color:var(--green-ink)}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto}
+.full{margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:72px;scroll-margin-top:72px}
+.eyebrow{font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-ink);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--sky) 0 50%,var(--coral) 50% 100%)}
+.lead{font-size:1.15rem;color:var(--muted)}
+.head{display:grid;gap:14px;margin-bottom:36px}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line);
+  margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top::after{content:"";display:block;height:4px;margin:0 calc(-1 * max(16px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));background:linear-gradient(90deg,var(--sky) 0 33.3%,#fff 33.3% 66.6%,var(--coral) 66.6%)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg);font-family:var(--font-display);font-weight:800;font-size:1.05rem;min-width:0}
+.brand svg{flex:none}
+.brand span{white-space:nowrap}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:2px;flex-wrap:wrap}
+nav a{display:block;padding:8px 11px;border-radius:8px;text-decoration:none;color:var(--fg);font-weight:600;font-size:.93rem}
+nav a:hover{background:var(--sky-soft)}
+nav a.active{background:var(--green);color:var(--on-green)}
+.tools{display:flex;align-items:center;gap:8px}
+.icon-btn{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:10px;width:42px;height:42px;font:inherit;font-size:1.1rem;cursor:pointer;display:grid;place-items:center}
+#menuBtn{display:none}
+@media(max-width:940px){
+  #menuBtn{display:grid}
+  nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-left,0px)) 14px}
+  nav.open{display:block}
+  nav ul{flex-direction:column}
+  nav a{padding:12px}
+}
+@media(max-width:420px){.brand span{font-size:.92rem;white-space:normal;line-height:1.1}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:12px;border:2px solid var(--green);background:var(--green);color:var(--on-green);font:inherit;font-weight:700;text-decoration:none;cursor:pointer}
+.btn:hover{filter:brightness(1.12)}
+.btn.ghost{background:transparent;color:var(--on-sky);border-color:var(--on-sky)}
+.btn.coral{background:var(--coral);border-color:var(--coral);color:var(--on-coral)}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+
+/* hero: three flag bands */
+.hero{margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)))}
+.band{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band-sky{background:var(--sky);color:var(--on-sky);padding-block:56px 40px}
+.band-white{background:#fff;color:#10241A;padding-block:34px}
+.band-coral{background:var(--coral);color:var(--on-coral);padding-block:30px}
+.hero h1{font-size:clamp(2.3rem,6.2vw,4.4rem);max-width:16ch}
+.hero .sub{font-size:1.2rem;margin-top:16px;max-width:52ch}
+.hero .row{margin-top:26px}
+.mid{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.mid p{color:#33463C;font-size:1.08rem}
+.band-coral .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.band-coral strong{font-family:var(--font-display);font-size:1.3rem}
+.band-coral .btn{background:var(--on-coral);border-color:var(--on-coral);color:#fff}
+@media(max-width:600px){.mid{grid-template-columns:1fr}}
+
+/* cards & grids */
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:10px;align-content:start;min-width:0}
+.card .meta{font-size:.82rem;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.tag{display:inline-block;width:fit-content;font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--sky-soft);color:var(--green-ink);border:1px solid var(--line)}
+.tag.coral{background:var(--coral-soft)}
+button.card{font:inherit;color:inherit;text-align:left;cursor:pointer}
+button.card:hover,a.card:hover{border-color:var(--sky);box-shadow:0 0 0 3px var(--sky-soft)}
+a.card{text-decoration:none;color:inherit}
+.alt{background:var(--bg-alt)}
+.thumb{height:120px;border-radius:12px;background:linear-gradient(180deg,var(--sky) 0 40%,#fff 40% 65%,var(--coral) 65%);display:grid;place-items:center;border:1px solid var(--line)}
+.thumb b{font-family:var(--font-display);color:var(--green);background:#fff;border:2px solid var(--green);border-radius:50%;width:46px;height:46px;display:grid;place-items:center;font-size:1.05rem}
+
+/* stats */
+.stats{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.stat{border-radius:16px;padding:22px;border:1px solid var(--line);background:var(--card);border-top:6px solid var(--sky)}
+.stat:nth-child(even){border-top-color:var(--coral)}
+.stat b{display:block;font-family:var(--font-display);font-size:2.6rem;line-height:1;color:var(--green-ink);font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-weight:600}
+.note{font-size:.85rem;color:var(--muted);margin-top:14px}
+
+/* sub navigation chips & tabs */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--fg);border-radius:99px;padding:8px 16px;font:inherit;font-weight:600;font-size:.92rem;cursor:pointer;text-decoration:none}
+.chip:hover{border-color:var(--sky)}
+.chip[aria-selected="true"],.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--on-green)}
+[role=tabpanel][hidden]{display:none!important}
+
+/* about */
+.split{display:grid;gap:36px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));align-items:start}
+.sub{padding-block:34px;border-top:1px solid var(--line);scroll-margin-top:130px}
+.sub:first-of-type{border-top:0}
+.sub h3{margin-bottom:14px;font-size:1.6rem}
+.mv{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.mv .card:first-child{border-top:6px solid var(--sky)} .mv .card:last-child{border-top:6px solid var(--coral)}
+.person{text-align:center;justify-items:center}
+.avatar{width:84px;height:84px;border-radius:50%;background:linear-gradient(180deg,var(--sky) 0 50%,var(--coral) 50%);display:grid;place-items:center;border:3px solid var(--green)}
+.avatar b{font-family:var(--font-display);color:#fff;font-size:1.6rem;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.timeline{list-style:none;margin:0;padding:0 0 0 22px;border-left:4px solid var(--sky);display:grid;gap:22px}
+.timeline li{position:relative}
+.timeline li::before{content:"";position:absolute;left:-31px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--coral);border:3px solid var(--bg)}
+.timeline b{font-family:var(--font-display);color:var(--green-ink);font-size:1.1rem}
+
+/* gallery */
+.gallery{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr))}
+.shot{aspect-ratio:4/3;max-width:100%;border-radius:14px;position:relative;overflow:hidden;border:1px solid var(--line);display:flex;align-items:flex-end}
+.shot:nth-child(3n+1){background:linear-gradient(160deg,var(--sky),#fff 70%)}
+.shot:nth-child(3n+2){background:linear-gradient(160deg,#fff,var(--coral))}
+.shot:nth-child(3n){background:linear-gradient(160deg,var(--sky),var(--coral))}
+.shot span{margin:8px;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,.92);color:#10241A;font-size:.82rem;font-weight:600}
+
+/* progress */
+.prog{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--sky),var(--green))}
+
+/* impact */
+.nodes{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))}
+.reports{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.reports li{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.ach{display:grid;gap:12px;padding:0;margin:0;list-style:none}
+.ach li{display:flex;gap:14px;padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.ach li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;margin-top:7px;background:var(--coral)}
+
+/* forms */
+form{display:grid;gap:14px}
+label{font-weight:600;font-size:.92rem;display:grid;gap:6px}
+input,select,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;min-width:0}
+textarea{min-height:110px;resize:vertical}
+.two{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.ok{padding:14px 16px;border-radius:12px;background:var(--sky-soft);border:1px solid var(--sky);font-weight:600}
+.ok[hidden]{display:none}
+.social{display:flex;flex-wrap:wrap;gap:10px}
+.social a{padding:10px 16px;border:1.5px solid var(--line);border-radius:99px;text-decoration:none;font-weight:700;background:var(--card)}
+.social a:hover{border-color:var(--coral)}
+.contact-grid{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+
+/* dialog */
+dialog{border:0;border-radius:18px;padding:0;max-width:min(560px,calc(100vw - 32px));width:100%;background:var(--card);color:var(--fg);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(8,20,28,.6)}
+.dlg{padding:26px;display:grid;gap:14px}
+.dlg .thumb{height:90px}
+.dl-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+
+footer{margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
+  background:var(--green);color:#fff;padding-top:44px;padding-bottom:calc(30px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));border-top:8px solid var(--coral)}
+footer a{color:#fff}
+.foot{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+footer ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+footer h4{color:var(--sky)}
+footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid rgba(255,255,255,.25);padding-top:16px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#home" aria-label="SIO home">
+      <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20.5" fill="#fff" stroke="#14591F" stroke-width="1.5"/><text x="22" y="28" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="800" font-size="17" fill="#14591F">sio</text><path d="M22 6.5l2 2.2-2 2.2-2-2.2z" fill="#14591F"/></svg>
+      <span>Students Islamic Organisation</span>
+    </a>
+    <nav id="nav" aria-label="Main">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About SIO</a></li>
+        <li><a href="#activities">Activities</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#impact">Our Impact</a></li>
+        <li><a href="#involved">Get Involved</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn" id="themeBtn" aria-label="Switch light or dark theme" title="Theme">◐</button>
+      <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HOME -->
+<div class="hero" id="home">
+  <div class="band band-sky"><div class="wrap">
+    <div class="eyebrow" style="color:var(--on-sky)">Students Islamic Organisation</div>
+    <h1>Students learning, serving and leading together.</h1>
+    <p class="sub">SIO brings students together around faith, knowledge and service, and prepares them to contribute to society with character.</p>
+    <div class="row"><a class="btn" href="#involved">Join SIO</a><a class="btn ghost" href="#activities">See our activities</a></div>
+  </div></div>
+  <div class="band band-white"><div class="wrap mid">
+    <svg width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="SIO emblem"><circle cx="60" cy="60" r="56" fill="#fff" stroke="#14591F" stroke-width="2"/><text x="60" y="76" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="800" font-size="46" fill="#14591F">sio</text><path d="M60 16l5 5.5-5 5.5-5-5.5z" fill="#14591F"/></svg>
+    <p><b>Introduction.</b> We are a student-led organisation working in schools, colleges and neighbourhoods. Our work covers education support, community service, character building and youth leadership.</p>
+  </div></div>
+  <div class="band band-coral"><div class="wrap">
+    <strong>Want to help with our next programme?</strong>
+    <a class="btn" href="#involved">Volunteer with us</a>
+  </div></div>
+</div>
+
+<section id="featured" class="wrap" style="scroll-margin-top:72px">
+  <div class="head"><div class="eyebrow">Featured activities</div><h2>What we are doing now</h2><p class="lead">A few of our recent programmes. Select one to read the details.</p></div>
+  <div class="grid" id="featuredGrid"></div>
+  <p style="margin-top:22px"><a href="#activities">View all activities →</a></p>
+</section>
+
+<section class="alt full" id="highlights"><div class="wrap">
+  <div class="head"><div class="eyebrow">Impact highlights</div><h2>Our work in numbers</h2></div>
+  <div class="stats">
+    <div class="stat"><b>25</b><span>Active nodes</span></div>
+    <div class="stat"><b>120</b><span>Programmes held</span></div>
+    <div class="stat"><b>3,500</b><span>Students reached</span></div>
+    <div class="stat"><b>400</b><span>Volunteers</span></div>
+  </div>
+  <p class="note">Sample figures. Replace them with SIO's verified numbers before publishing.</p>
+</div></section>
+
+<!-- ABOUT -->
+<section id="about" class="wrap">
+  <div class="head"><div class="eyebrow">About SIO</div><h2>Who we are and what we stand for</h2></div>
+  <div class="chips" aria-label="About sections">
+    <a class="chip" href="#who">Who We Are</a><a class="chip" href="#mission">Mission &amp; Vision</a><a class="chip" href="#leadership">Leadership</a><a class="chip" href="#history">Our History</a>
+  </div>
+
+  <div class="sub" id="who">
+    <h3>Who We Are</h3>
+    <div class="split">
+      <p>The Students Islamic Organisation is a student movement that works for the all-round development of young people. We organise study circles, career guidance, social service drives and leadership camps, run by students for students.</p>
+      <p>Our members come from different courses, schools and neighbourhoods. What brings us together is a shared commitment to learning, honest conduct and service to people of every background.</p>
+    </div>
+  </div>
+
+  <div class="sub" id="mission">
+    <h3>Mission &amp; Vision</h3>
+    <div class="mv">
+      <div class="card"><span class="tag">Our mission</span><h4>Build capable, caring students</h4><p>To help students grow in knowledge, character and responsibility, and to give them real opportunities to serve their communities.</p></div>
+      <div class="card"><span class="tag coral">Our vision</span><h4>A generation that leads with integrity</h4><p>A student community that studies seriously, acts justly and contributes to a peaceful and inclusive society.</p></div>
+    </div>
+  </div>
+
+  <div class="sub" id="leadership">
+    <h3>Leadership</h3>
+    <div class="grid" id="leaders"></div>
+    <p class="note">Sample names and roles. Add your office bearers and photographs.</p>
+  </div>
+
+  <div class="sub" id="history">
+    <h3>Our History</h3>
+    <ol class="timeline">
+      <li><b>Founding</b><p>A small group of students begins regular study circles and welfare work on campus.</p></li>
+      <li><b>First city unit</b><p>The first local unit is formed and begins organising public programmes.</p></li>
+      <li><b>Expansion</b><p>New nodes open in more colleges and areas, with a growing volunteer base.</p></li>
+      <li><b>Today</b><p>Education, service and leadership programmes run throughout the year.</p></li>
+    </ol>
+    <p class="note">Sample timeline. Add the real dates and milestones.</p>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="activities" class="alt full"><div class="wrap">
+  <div class="head"><div class="eyebrow">Activities</div><h2>All activities</h2><p class="lead">Browse by category, open any programme for its details, and see moments from the gallery below.</p></div>
+  <div class="chips" id="catChips" role="group" aria-label="Categories"></div>
+  <div class="grid" id="actGrid"></div>
+
+  <div class="head" id="gallery" style="margin-top:56px;scroll-margin-top:90px"><div class="eyebrow">Gallery</div><h3 style="font-size:1.8rem">Moments from our programmes</h3></div>
+  <div class="gallery" id="galleryGrid"></div>
+  <p class="note">Placeholder tiles. Add your own photographs here.</p>
+</div></section>
+
+<!-- PROJECTS -->
+<section id="projects" class="wrap">
+  <div class="head"><div class="eyebrow">Projects</div><h2>Long-term work</h2></div>
+  <div class="chips" role="tablist" aria-label="Project status" data-tabs="proj">
+    <button class="chip" role="tab" aria-selected="true" data-tab="ongoing">Ongoing</button>
+    <button class="chip" role="tab" aria-selected="false" data-tab="completed">Completed</button>
+    <button class="chip" role="tab" aria-selected="false" data-tab="upcoming">Upcoming Initiatives</button>
+  </div>
+  <div role="tabpanel" data-panel="proj" id="proj-ongoing"><div class="grid" id="projOngoing"></div></div>
+  <div role="tabpanel" data-panel="proj" id="proj-completed" hidden><div class="grid" id="projCompleted"></div></div>
+  <div role="tabpanel" data-panel="proj" id="proj-upcoming" hidden><div class="grid" id="projUpcoming"></div></div>
+</section>
+
+<!-- NEWS -->
+<section id="news" class="alt full"><div class="wrap">
+  <div class="head"><div class="eyebrow">News &amp; Updates</div><h2>Latest from SIO</h2></div>
+  <div class="chips" role="tablist" aria-label="News type" data-tabs="news">
+    <button class="chip" role="tab" aria-selected="true" data-tab="ann">Announcements</button>
+    <button class="chip" role="tab" aria-selected="false" data-tab="art">Articles</button>
+    <button class="chip" role="tab" aria-selected="false" data-tab="evt">Events</button>
+  </div>
+  <div role="tabpanel" data-panel="news" id="news-ann"><div class="grid" id="newsAnn"></div></div>
+  <div role="tabpanel" data-panel="news" id="news-art" hidden><div class="grid" id="newsArt"></div></div>
+  <div role="tabpanel" data-panel="news" id="news-evt" hidden><div class="grid" id="newsEvt"></div></div>
+</div></section>
+
+<!-- IMPACT -->
+<section id="impact" class="wrap">
+  <div class="head"><div class="eyebrow">Our Impact</div><h2>What our work has achieved</h2></div>
+  <div class="chips">
+    <a class="chip" href="#nodes">Nodes</a><a class="chip" href="#achievements">Achievements</a><a class="chip" href="#statistics">Statistics</a><a class="chip" href="#reports">Annual Reports</a>
+  </div>
+
+  <div class="sub" id="nodes">
+    <h3>Nodes</h3>
+    <p class="lead" style="margin-bottom:18px">Local units where members meet and run programmes.</p>
+    <div class="nodes" id="nodeGrid"></div>
+    <p class="note">Sample node names. Replace them with your actual units.</p>
+  </div>
+
+  <div class="sub" id="achievements">
+    <h3>Achievements</h3>
+    <ul class="ach">
+      <li><div><b>Scholarship support drive</b><p>Helped students from low-income families continue their studies.</p></div></li>
+      <li><div><b>City-wide blood donation camps</b><p>Organised camps together with hospitals and partner groups.</p></div></li>
+      <li><div><b>Student leadership academy</b><p>Trained a new batch of student leaders every year.</p></div></li>
+    </ul>
+    <p class="note">Sample achievements. Replace them with your own.</p>
+  </div>
+
+  <div class="sub" id="statistics">
+    <h3>Statistics</h3>
+    <div class="stats">
+      <div class="stat"><b>25</b><span>Nodes</span></div>
+      <div class="stat"><b>3,500</b><span>Students reached</span></div>
+      <div class="stat"><b>60</b><span>Service drives</span></div>
+      <div class="stat"><b>15</b><span>Partner institutions</span></div>
+    </div>
+    <p class="note">Sample figures. Replace them with verified numbers.</p>
+  </div>
+
+  <div class="sub" id="reports">
+    <h3>Annual Reports</h3>
+    <ul class="reports" id="reportList"></ul>
+  </div>
+</section>
+
+<!-- GET INVOLVED -->
+<section id="involved" class="alt full"><div class="wrap">
+  <div class="head"><div class="eyebrow">Get Involved</div><h2>There is a place for you</h2><p class="lead">Volunteer your time, take part in a programme, or work with us as an institution.</p></div>
+  <div class="chips" role="tablist" aria-label="Ways to get involved" data-tabs="inv">
+    <button class="chip" role="tab" aria-selected="true" data-tab="vol">Volunteer</button>
+    <button class="chip" role="tab" aria-selected="false" data-tab="par">Participate</button>
+    <button class="chip" role="tab" aria-selected="false" data-tab="prt">Partnerships</button>
+  </div>
+  <div role="tabpanel" data-panel="inv" id="inv-vol">
+    <div class="split">
+      <div style="display:grid;gap:12px"><h3>Volunteer with SIO</h3><p>Help organise camps, teach, mentor younger students or support service drives. Tell us what you can offer and we will match you with a team.</p></div>
+      <form data-form="volunteer">
+        <div class="two"><label for="v-name">Full name<input id="v-name" required></label><label for="v-phone">Phone<input id="v-phone" type="tel" required></label></div>
+        <label for="v-area">Where would you like to help?<select id="v-area"><option>Education support</option><option>Community service</option><option>Events and media</option><option>Youth leadership</option></select></label>
+        <label for="v-msg">A few words about you<textarea id="v-msg"></textarea></label>
+        <button class="btn" type="submit">Submit volunteer form</button>
+        <div class="ok" hidden></div>
+      </form>
+    </div>
+  </div>
+  <div role="tabpanel" data-panel="inv" id="inv-par" hidden>
+    <div class="split">
+      <div style="display:grid;gap:12px"><h3>Participate in a programme</h3><p>Study circles, workshops, camps and public events are open to students. Pick a programme and we will send you the details.</p></div>
+      <form data-form="participate">
+        <div class="two"><label for="p-name">Full name<input id="p-name" required></label><label for="p-inst">School or college<input id="p-inst"></label></div>
+        <label for="p-prog">Programme<select id="p-prog"></select></label>
+        <button class="btn" type="submit">Register interest</button>
+        <div class="ok" hidden></div>
+      </form>
+    </div>
+  </div>
+  <div role="tabpanel" data-panel="inv" id="inv-prt" hidden>
+    <div class="split">
+      <div style="display:grid;gap:12px"><h3>Partner with us</h3><p>Schools, colleges, hospitals, NGOs and businesses can work with SIO on joint programmes, sponsorships and resources.</p></div>
+      <form data-form="partnership">
+        <div class="two"><label for="t-org">Organisation<input id="t-org" required></label><label for="t-contact">Contact person<input id="t-contact" required></label></div>
+        <label for="t-msg">How would you like to work together?<textarea id="t-msg"></textarea></label>
+        <button class="btn" type="submit">Send partnership enquiry</button>
+        <div class="ok" hidden></div>
+      </form>
+    </div>
+  </div>
+</div></section>
+
+<!-- CONTACT -->
+<section id="contact" class="wrap">
+  <div class="head"><div class="eyebrow">Contact</div><h2>Get in touch</h2></div>
+  <div class="contact-grid">
+    <div id="cform">
+      <h3 style="margin-bottom:14px">Contact form</h3>
+      <form data-form="contact">
+        <div class="two"><label for="c-name">Name<input id="c-name" required></label><label for="c-email">Email<input id="c-email" type="email" required></label></div>
+        <label for="c-sub">Subject<input id="c-sub"></label>
+        <label for="c-msg">Message<textarea id="c-msg" required></textarea></label>
+        <button class="btn" type="submit">Send message</button>
+        <div class="ok" hidden></div>
+      </form>
+    </div>
+    <div style="display:grid;gap:28px;align-content:start">
+      <div id="locations"><h3 style="margin-bottom:14px">Locations</h3>
+        <div class="grid" style="grid-template-columns:1fr">
+          <div class="card"><h4>Head office</h4><p>[Street address]<br>[City, State, PIN]</p><p class="meta">Phone: [add number]<br>Email: [add email]</p></div>
+          <div class="card"><h4>City office</h4><p>[Street address]<br>[City, State, PIN]</p><p class="meta">Open: [days and hours]</p></div>
+        </div>
+      </div>
+      <div id="social"><h3 style="margin-bottom:14px">Social media</h3>
+        <div class="social"><a href="#contact">Instagram</a><a href="#contact">Facebook</a><a href="#contact">YouTube</a><a href="#contact">WhatsApp</a><a href="#contact">X</a></div>
+        <p class="note">Links are placeholders. Add SIO's real profile addresses.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><h4>Students Islamic Organisation</h4><p style="margin-top:10px">Learning, service and leadership for students.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="#about">About SIO</a></li><li><a href="#activities">Activities</a></li><li><a href="#projects">Projects</a></li><li><a href="#news">News &amp; Updates</a></li></ul></div>
+      <div><h4>Join us</h4><ul><li><a href="#involved">Volunteer</a></li><li><a href="#involved">Participate</a></li><li><a href="#involved">Partnerships</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    </div>
+    <p class="fine">© Students Islamic Organisation. Names, dates and figures on this page are sample content to be replaced with SIO's own.</p>
+  </div>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dlgTitle"><div class="dlg" id="dlgBody"></div></dialog>
+
+<script>
+(function(){
+  var ACT=[
+    {id:1,cat:"Education",title:"Study Circle Series",date:"Every Saturday",place:"Central node",sum:"Weekly guided study and discussion for school and college students.",det:"Students meet in small groups for guided reading, exam preparation help and open discussion. Senior members mentor younger ones. Open to all students."},
+    {id:2,cat:"Community Service",title:"Blood Donation Camp",date:"Twice a year",place:"Partner hospital",sum:"Volunteer-run camp with medical teams from partner hospitals.",det:"Members register donors, manage the venue and follow up with donors afterwards. Qualified medical staff run the collection."},
+    {id:3,cat:"Youth Leadership",title:"Leadership Camp",date:"Semester break",place:"Residential venue",sum:"Three days of training in public speaking, teamwork and organising.",det:"Participants take part in workshops, group projects and a community service task, and finish by planning an initiative for their own campus."},
+    {id:4,cat:"Spiritual & Character",title:"Character Building Workshops",date:"Monthly",place:"Local nodes",sum:"Discussions on honesty, responsibility and respect in student life.",det:"Short facilitated sessions using stories, case studies and group reflection. Parents and teachers are welcome to attend."},
+    {id:5,cat:"Health & Environment",title:"Campus Clean-up Drive",date:"Quarterly",place:"Colleges and public areas",sum:"Students clean public spaces and plant saplings.",det:"Teams are assigned areas in advance. SIO provides gloves, bags and saplings. Volunteers of all backgrounds are welcome."},
+    {id:6,cat:"Education",title:"Career Guidance Day",date:"Each January",place:"Open hall",sum:"Talks and one-to-one advice from professionals for final-year students.",det:"Professionals from different fields speak about courses, exams and early career choices, followed by small-group advice sessions."}
+  ];
+  var CATS=["All"].concat(ACT.map(function(a){return a.cat}).filter(function(v,i,a){return a.indexOf(v)===i}));
+  var PROJ={
+    ongoing:[{t:"Scholarship Fund",s:"Raising and distributing study support for students in need.",p:60},{t:"Free Tuition Centres",s:"Evening classes run by volunteer tutors for school students.",p:45}],
+    completed:[{t:"Library Renovation",s:"Refurbished a community reading room with new books and seating.",p:100},{t:"Flood Relief Drive",s:"Collected and delivered essentials to affected families.",p:100}],
+    upcoming:[{t:"Digital Skills Lab",s:"Computer and internet skills classes for students and parents.",p:0},{t:"Mentorship Network",s:"Matching first-year students with senior mentors.",p:0}]
+  };
+  var NEWS={
+    ann:[{t:"Registrations open for the Leadership Camp",d:"15 Nov 2026",s:"Limited places. Register through the Get Involved section."},{t:"New volunteer orientation",d:"10 Nov 2026",s:"New volunteers are invited to an introduction session."}],
+    art:[{t:"Why study circles still work",d:"2 Nov 2026",s:"A look at how small groups help students learn better and stay motivated."},{t:"Volunteering during exam season",d:"20 Oct 2026",s:"Practical ways to serve without falling behind in studies."}],
+    evt:[{t:"Annual Student Convention",d:"[Add date]",s:"A day of talks, exhibitions and awards for student achievers."},{t:"Career Guidance Day",d:"[Add date]",s:"Professionals meet final-year students for advice sessions."}]
+  };
+  var LEADERS=[["Name Surname","State President"],["Name Surname","General Secretary"],["Name Surname","Treasurer"],["Name Surname","City President"]];
+  var NODES=["North Node","South Node","East Node","West Node","Central Node","University Node","Women's Wing","Junior Wing"];
+  var REPORTS=["Annual Report 2025","Annual Report 2024","Annual Report 2023"];
+
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+  /* activities */
+  var dlg=document.getElementById("dlg"),dlgBody=document.getElementById("dlgBody");
+  function openAct(a){
+    dlgBody.innerHTML='<div class="thumb"><b>sio</b></div><span class="tag">'+esc(a.cat)+'</span><h3>'+esc(a.title)+'</h3>'+
+      '<p class="meta" style="color:var(--muted);font-weight:600">'+esc(a.date)+' · '+esc(a.place)+'</p><p>'+esc(a.det)+'</p>'+
+      '<div class="dl-row"><a class="btn" href="#involved" id="dlgJoin">Take part</a><button class="btn" style="background:transparent;color:var(--fg);border-color:var(--line)" id="dlgClose">Close</button></div>';
+    dlg.showModal();
+    document.getElementById("dlgClose").onclick=function(){dlg.close()};
+    document.getElementById("dlgJoin").onclick=function(){dlg.close()};
+  }
+  dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
+  function actCard(a){
+    var b=el("button","card",'<div class="thumb"><b>sio</b></div><span class="tag">'+esc(a.cat)+'</span><h3>'+esc(a.title)+'</h3><p>'+esc(a.sum)+'</p><span class="meta">'+esc(a.date)+'</span>');
+    b.type="button";b.onclick=function(){openAct(a)};return b;
+  }
+  var feat=document.getElementById("featuredGrid");
+  [ACT[0],ACT[2],ACT[1]].forEach(function(a){feat.appendChild(actCard(a))});
+  var grid=document.getElementById("actGrid"),chips=document.getElementById("catChips"),cur="All";
+  function renderActs(){grid.innerHTML="";ACT.filter(function(a){return cur==="All"||a.cat===cur}).forEach(function(a){grid.appendChild(actCard(a))})}
+  CATS.forEach(function(c){
+    var b=el("button","chip",esc(c));b.type="button";b.setAttribute("aria-pressed",c===cur);
+    b.onclick=function(){cur=c;Array.prototype.forEach.call(chips.children,function(x){x.setAttribute("aria-pressed",x===b)});renderActs()};
+    chips.appendChild(b);
+  });
+  renderActs();
+
+  /* gallery */
+  var gal=document.getElementById("galleryGrid");
+  ["Study circle","Blood donation camp","Leadership camp","Clean-up drive","Career day","Volunteers","Annual convention","Workshop"].forEach(function(c){gal.appendChild(el("div","shot",'<span>'+esc(c)+'</span>'))});
+
+  /* projects */
+  function projCard(p){return el("div","card",'<h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p>'+(p.p>0?'<div class="prog" role="progressbar" aria-valuenow="'+p.p+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+p.p+'%"></i></div><span class="meta">'+p.p+'% complete</span>':'<span class="tag coral">Coming soon</span>'))}
+  PROJ.ongoing.forEach(function(p){document.getElementById("projOngoing").appendChild(projCard(p))});
+  PROJ.completed.forEach(function(p){document.getElementById("projCompleted").appendChild(projCard(p))});
+  PROJ.upcoming.forEach(function(p){document.getElementById("projUpcoming").appendChild(projCard(p))});
+
+  /* news */
+  function newsCard(n){return el("div","card",'<span class="meta">'+esc(n.d)+'</span><h3>'+esc(n.t)+'</h3><p>'+esc(n.s)+'</p>')}
+  NEWS.ann.forEach(function(n){document.getElementById("newsAnn").appendChild(newsCard(n))});
+  NEWS.art.forEach(function(n){document.getElementById("newsArt").appendChild(newsCard(n))});
+  NEWS.evt.forEach(function(n){document.getElementById("newsEvt").appendChild(newsCard(n))});
+
+  /* about, impact */
+  var ld=document.getElementById("leaders");
+  LEADERS.forEach(function(l){ld.appendChild(el("div","card person",'<div class="avatar"><b>'+esc(l[0].charAt(0))+'</b></div><h4>'+esc(l[0])+'</h4><span class="meta">'+esc(l[1])+'</span>'))});
+  var ng=document.getElementById("nodeGrid");
+  NODES.forEach(function(n){ng.appendChild(el("div","card",'<h4>'+esc(n)+'</h4><span class="meta">[Add members and area]</span>'))});
+  var rl=document.getElementById("reportList");
+  REPORTS.forEach(function(r){rl.appendChild(el("li",null,'<b>'+esc(r)+'</b><span class="tag">Available on request</span>'))});
+
+  /* participate select */
+  var ps=document.getElementById("p-prog");
+  ACT.forEach(function(a){var o=document.createElement("option");o.textContent=a.title;ps.appendChild(o)});
+
+  /* tabs */
+  document.querySelectorAll("[data-tabs]").forEach(function(group){
+    var key=group.getAttribute("data-tabs");
+    group.querySelectorAll("[role=tab]").forEach(function(tab){
+      tab.addEventListener("click",function(){
+        group.querySelectorAll("[role=tab]").forEach(function(t){t.setAttribute("aria-selected",t===tab)});
+        document.querySelectorAll('[data-panel="'+key+'"]').forEach(function(p){p.hidden=(p.id!==key+"-"+tab.getAttribute("data-tab"))});
+      });
+    });
+  });
+
+  /* forms: not connected to any mailbox yet */
+  document.querySelectorAll("form[data-form]").forEach(function(f){
+    f.addEventListener("submit",function(e){
+      e.preventDefault();
+      var ok=f.querySelector(".ok");
+      ok.hidden=false;
+      ok.textContent="Thank you. This form is not connected to an inbox yet, so nothing has been sent.";
+    });
+  });
+
+  /* menu and theme */
+  var nav=document.getElementById("nav"),mb=document.getElementById("menuBtn");
+  mb.onclick=function(){var o=nav.classList.toggle("open");mb.setAttribute("aria-expanded",o)};
+  nav.addEventListener("click",function(e){if(e.target.tagName==="A"){nav.classList.remove("open");mb.setAttribute("aria-expanded","false")}});
+  document.getElementById("themeBtn").onclick=function(){
+    var r=document.documentElement,dark=r.getAttribute("data-theme")==="dark"||(!r.getAttribute("data-theme")&&matchMedia("(prefers-color-scheme: dark)").matches);
+    r.setAttribute("data-theme",dark?"light":"dark");
+  };
+
+  /* active nav link */
+  var links=[].slice.call(nav.querySelectorAll("a"));
+  var ids=links.map(function(a){return a.getAttribute("href").slice(1)});
+  function spy(){
+    var y=window.scrollY+120,cur=ids[0];
+    ids.forEach(function(id){var s=document.getElementById(id);if(s&&s.getBoundingClientRect().top+window.scrollY<=y)cur=id});
+    links.forEach(function(a){a.classList.toggle("active",a.getAttribute("href")==="#"+cur)});
+  }
+  window.addEventListener("scroll",spy,{passive:true});spy();
+})();
+</script>
+
+</body>
+</html>
