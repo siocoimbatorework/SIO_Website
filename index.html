@@ -147,6 +147,8 @@ a.card{text-decoration:none;color:inherit}
 .shot:nth-child(3n+2){background:linear-gradient(160deg,#fff,var(--coral))}
 .shot:nth-child(3n){background:linear-gradient(160deg,var(--sky),var(--coral))}
 .shot span{margin:8px;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,.92);color:#10241A;font-size:.82rem;font-weight:600}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shot span{position:relative;z-index:1}
 
 /* progress */
 .prog{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
@@ -508,8 +510,20 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
   renderActs();
 
   /* gallery */
-  var gal=document.getElementById("galleryGrid");
-  ["Study circle","Blood donation camp","Leadership camp","Clean-up drive","Career day","Volunteers","Annual convention","Workshop"].forEach(function(c){gal.appendChild(el("div","shot",'<span>'+esc(c)+'</span>'))});
+ var gal=document.getElementById("galleryGrid");
+[
+  ["Entrepreneurs workshop","images/gallery/entreprenaurs-workshop.jpg"],
+  ["Blood donation camp"],
+  ["Leadership camp"],
+  ["Clean-up drive"],
+  ["Career day"],
+  ["Volunteers"],
+  ["Annual convention"],
+  ["Workshop"]
+].forEach(function(g){
+  var img=g[1]?'<img src="'+esc(g[1])+'" alt="'+esc(g[0])+'" loading="lazy">':'';
+  gal.appendChild(el("div","shot",img+'<span>'+esc(g[0])+'</span>'));
+});
 
   /* projects */
   function projCard(p){return el("div","card",'<h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p>'+(p.p>0?'<div class="prog" role="progressbar" aria-valuenow="'+p.p+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+p.p+'%"></i></div><span class="meta">'+p.p+'% complete</span>':'<span class="tag coral">Coming soon</span>'))}
