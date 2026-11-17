@@ -606,7 +606,6 @@ function actCard(a){
   function projCard(p){return el("div","card",'<h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p>'+(p.p>0?'<div class="prog" role="progressbar" aria-valuenow="'+p.p+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+p.p+'%"></i></div><span class="meta">'+p.p+'% complete</span>':'<span class="tag coral">Coming soon</span>'))}
   
   
-  PROJ.upcoming.forEach(function(p){document.getElementById("projUpcoming").appendChild(projCard(p))});
 
   /* news */
   function newsCard(n){return el("div","card",'<span class="meta">'+esc(n.d)+'</span><h3>'+esc(n.t)+'</h3><p>'+esc(n.s)+'</p>')}
