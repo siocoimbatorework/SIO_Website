@@ -183,6 +183,15 @@ a.card{text-decoration:none;color:inherit}
 .spot-facts b{font-size:1.05rem;overflow-wrap:break-word}
 @media(prefers-reduced-motion:reduce){.spot-pill i{animation:none}}
 .spot .spot-follow a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+.fp{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);margin-top:32px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card)}
+.fp img{display:block;width:100%;height:100%;min-height:280px;object-fit:cover;object-position:center top}
+.fp-body{padding:28px;display:grid;gap:14px;align-content:center;min-width:0}
+.fp-tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.fp-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:0;padding:0;list-style:none}
+.fp-facts li{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg-alt)}
+.fp-facts small{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+@media(max-width:820px){.fp{grid-template-columns:1fr}.fp-body{padding:22px}}
   
 /* progress */
 .prog{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
@@ -365,6 +374,27 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
   <div role="tabpanel" data-panel="proj" id="proj-ongoing"><div class="grid" id="projOngoing"></div></div>
   <div role="tabpanel" data-panel="proj" id="proj-completed" hidden><div class="grid" id="projCompleted"></div></div>
   <div role="tabpanel" data-panel="proj" id="proj-upcoming" hidden><div class="grid" id="projUpcoming"></div></div>
+  
+  <article class="fp">
+  <img src="images/student-centre.jpg" alt="SIO Coimbatore Student Centre building" loading="lazy">
+  <div class="fp-body">
+    <span class="tag coral">Featured project</span>
+    <h3>SIO Coimbatore Student Centre</h3>
+    <p>A home for students in Coimbatore, bringing learning, accommodation, media and organisation work under one roof.</p>
+    <ul class="fp-tags">
+      <li class="tag">Conference Hall</li>
+      <li class="tag">Boys' Hostel</li>
+      <li class="tag">Open-to-All Library</li>
+      <li class="tag">SIO District Office</li>
+      <li class="tag">Media Centre</li>
+    </ul>
+    <ul class="fp-facts">
+      <li><small>Status</small><b>[Add status]</b></li>
+      <li><small>Location</small><b>[Add location]</b></li>
+      <li><small>Target</small><b>[Add date]</b></li>
+    </ul>
+  </div>
+</article>
 </section>
 
 <!-- NEWS -->
