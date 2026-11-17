@@ -547,15 +547,30 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
     ann:[{t:"Registrations open for the Leadership Camp",d:"06th Dec 2026",s:"Join SIO Coimbatore's Investor Mission 2026 and explore the world of ethical, halal investing!"},{t:"Documenting Islamophobia on Campuses",d:"10 Nov 2026",s:"CERT has launched an online portal, inaugurated by Br. Abdul Hafeez, National President of SIO, to document and report incidents of Islamophobia across Indian campuses, promoting awareness and safer educational spaces."}],
   };
   var LEADERS=[["Ashik","District President","images/President.jpg"],["Anas Rahman","General Secretary","images/General-sec.jpeg"],["Hisham","Organisational secretary","images/org-secretary.jpeg"],["Ahammed Mishal V S","Finance Secretary","images/Finance-Secretary.jpg"]];
-  var NODES=[
-  ["Track Force Sports Club [TFSC]","images/nodes/tfsc.png"],
-  ["ALBAAB Islamic Academy","images/nodes/albaab.png"],
-  ["ECGC Education Career Guidance செல்","images/nodes/ecgc.png"],
-  ["இளம்பிறை Children's Magazine","images/nodes/Ilampirai.png"],
-  ["Sagotharan","images/nodes/sagotharan.png"],
-  ["NESAN","images/nodes/nesan.png"],
-  ["Happy Theater","images/nodes/ht.png"],
-  ["Kalam","images/nodes/kalam.png"]
+  var NODES = [
+  ["Track Force Sports Club [TFSC]", "images/nodes/tfsc.png",
+   "Promoting sports, fitness, teamwork and discipline among students through sporting activities and events."],
+
+  ["ALBAAB Islamic Academy", "images/nodes/albaab.png",
+   "An educational initiative focused on Islamic learning, knowledge development and character building."],
+
+  ["ECGC Education Career Guidance செல்", "images/nodes/ecgc.png",
+   "Guiding students towards the right educational pathways and career opportunities through counselling and awareness programmes."],
+
+  ["இளம்பிறை Children's Magazine", "images/nodes/Ilampirai.png",
+   "Encouraging children's creativity, reading habits and intellectual development through engaging publications."],
+
+  ["Sagotharan", "images/nodes/sagotharan.png",
+   "A platform that promotes brotherhood, friendship and meaningful connections among students."],
+
+  ["NESAN", "images/nodes/nesan.png",
+   "An initiative dedicated to encouraging social responsibility, compassion and community engagement."],
+
+  ["Happy Theater", "images/nodes/ht.png",
+   "Using theatre and creative performances to encourage artistic expression, communication and social awareness."],
+
+  ["Kalam", "images/nodes/kalam.png",
+   "Encouraging creative thinking, knowledge sharing and intellectual expression among students."]
 ];
   
   function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
@@ -635,13 +650,41 @@ function actCard(a){
   var av=l[2]?'<div class="avatar"><img src="'+esc(l[2])+'" alt="'+esc(l[0])+'"></div>':'<div class="avatar"><b>'+esc(l[0].charAt(0))+'</b></div>';
   ld.appendChild(el("div","card person",av+'<h4>'+esc(l[0])+'</h4><span class="meta">'+esc(l[1])+'</span>'));
 });
-  var ng=document.getElementById("nodeGrid");
+
   
-  NODES.forEach(function(n){
-  var logo=n[1]?'<img class="node-logo" src="'+esc(n[1])+'" alt="'+esc(n[0])+' logo" loading="lazy">':'<span class="node-logo node-ph">'+esc(n[0].charAt(0))+'</span>';
-  ng.appendChild(el("div","card node",logo+'<h4>'+esc(n[0])+'</h4>'));
+  var ng = document.getElementById("nodeGrid");
+
+NODES.forEach(function(n) {
+  var logo = '<img class="node-logo" src="' + esc(n[1]) +
+    '" alt="' + esc(n[0]) + ' logo" loading="lazy">';
+
+  var card = el("button", "card node",
+    logo + '<h4>' + esc(n[0]) + '</h4>'
+  );
+
+  card.type = "button";
+
+  card.onclick = function() {
+    dlgBody.innerHTML =
+      '<div style="display:flex;align-items:center;gap:15px">' +
+      logo +
+      '<h3>' + esc(n[0]) + '</h3>' +
+      '</div>' +
+      '<p>' + esc(n[2]) + '</p>' +
+      '<button class="btn" id="nodeClose">Close</button>';
+
+    dlg.showModal();
+
+    document.getElementById("nodeClose").onclick = function() {
+      dlg.close();
+    };
+  };
+
+  ng.appendChild(card);
 });
 
+
+  
   /* participate select */
   var ps=document.getElementById("p-prog");
   ACT.forEach(function(a){var o=document.createElement("option");o.textContent=a.title;ps.appendChild(o)});
