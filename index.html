@@ -365,15 +365,8 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
 
 <!-- PROJECTS -->
 <section id="projects" class="wrap">
+  
   <div class="head"><div class="eyebrow">Projects</div><h2>Long-term work</h2></div>
-  <div class="chips" role="tablist" aria-label="Project status" data-tabs="proj">
-    <button class="chip" role="tab" aria-selected="true" data-tab="ongoing">Ongoing</button>
-    <button class="chip" role="tab" aria-selected="false" data-tab="completed">Completed</button>
-    <button class="chip" role="tab" aria-selected="false" data-tab="upcoming">Upcoming Initiatives</button>
-  </div>
-  <div role="tabpanel" data-panel="proj" id="proj-ongoing"><div class="grid" id="projOngoing"></div></div>
-  <div role="tabpanel" data-panel="proj" id="proj-completed" hidden><div class="grid" id="projCompleted"></div></div>
-  <div role="tabpanel" data-panel="proj" id="proj-upcoming" hidden><div class="grid" id="projUpcoming"></div></div>
   
   <article class="fp">
   <img src="images/student-centre.jpg" alt="SIO Coimbatore Student Centre building" loading="lazy">
@@ -611,8 +604,8 @@ function actCard(a){
 
   /* projects */
   function projCard(p){return el("div","card",'<h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p>'+(p.p>0?'<div class="prog" role="progressbar" aria-valuenow="'+p.p+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+p.p+'%"></i></div><span class="meta">'+p.p+'% complete</span>':'<span class="tag coral">Coming soon</span>'))}
-  PROJ.ongoing.forEach(function(p){document.getElementById("projOngoing").appendChild(projCard(p))});
-  PROJ.completed.forEach(function(p){document.getElementById("projCompleted").appendChild(projCard(p))});
+  
+  
   PROJ.upcoming.forEach(function(p){document.getElementById("projUpcoming").appendChild(projCard(p))});
 
   /* news */
