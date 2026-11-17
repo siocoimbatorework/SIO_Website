@@ -174,10 +174,13 @@ a.card{text-decoration:none;color:inherit}
 .spot h2{font-size:clamp(2rem,5vw,3.4rem);color:#fff}
 .spot p{color:#E3F0E6;font-size:1.1rem}
 .spot .spot-follow{color:var(--sky);font-weight:700}
-.spot-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0;padding:0;list-style:none}
+
+.spot-facts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,2.2fr);gap:12px;margin:0;padding:0;list-style:none}
+@media(max-width:700px){.spot-facts{grid-template-columns:1fr 1fr}.spot-facts li:last-child{grid-column:1/-1}}
+  
 .spot-facts li{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:12px 14px}
 .spot-facts small{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);font-weight:700}
-.spot-facts b{font-size:1.05rem;overflow-wrap:anywhere}
+.spot-facts b{font-size:1.05rem;overflow-wrap:break-word}
 @media(prefers-reduced-motion:reduce){.spot-pill i{animation:none}}
 .spot .spot-follow a{color:inherit;text-decoration:underline;text-underline-offset:3px}
   
@@ -279,7 +282,7 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
       <ul class="spot-facts">
         <li><small>Date</small><b>06th DEC</b></li>
         <li><small>Time</small><b>10:00 AM - 1:00 PM</b></li>
-        <li><small>Venue</small><b>Siruthuli Noyyal Life Centre, Sungam Bypass Road, Ramanathapuram,Coimbatore</b></li>
+        <li><small>Venue</small><b>Siruthuli Noyyal Life Centre, Sungam Bypass Road, Ramanathapuram, Coimbatore</b></li>
       </ul>
       <p class="spot-follow">Follow <a href="https://www.instagram.com/sio_coimbatore" target="_blank" rel="noopener">@sio_coimbatore</a> for the speaker reveal.</p>
     </div>
