@@ -482,9 +482,8 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
     evt:[{t:"Annual Student Convention",d:"[Add date]",s:"A day of talks, exhibitions and awards for student achievers."},{t:"Career Guidance Day",d:"[Add date]",s:"Professionals meet final-year students for advice sessions."}]
   };
   var LEADERS=[["Ashik","District President","images/President.jpg"],["Anas Rahman","General Secretary","images/General-sec.jpeg"],["Hisham","Organisational secretary","images/org-secretary.jpeg"],["Ahammed Mishal V S","Finance Secretary","images/Finance-Secretary.jpg"]];
-  var NODES=["North Node","South Node","East Node","West Node","Central Node","University Node","Women's Wing","Junior Wing"];
-  var REPORTS=["Annual Report 2025","Annual Report 2024","Annual Report 2023"];
-
+  var NODES=["Track Force Sports Club [TFSC]","ALBAAB Islamic Academy","ECGC Education Career Guidance செல்","இளம்பிறை Children's Magazine","Sagotharan","NESAN","Happy Theater","GIO - Girls Islamic Organisation"];
+  
   function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
   
@@ -566,7 +565,7 @@ function actCard(a){
   ld.appendChild(el("div","card person",av+'<h4>'+esc(l[0])+'</h4><span class="meta">'+esc(l[1])+'</span>'));
 });
   var ng=document.getElementById("nodeGrid");
-  NODES.forEach(function(n){ng.appendChild(el("div","card",'<h4>'+esc(n)+'</h4><span class="meta">[Add members and area]</span>'))});
+  NODES.forEach(function(n){ng.appendChild(el("div","card",'<h4>'+esc(n)+'</h4>'))});
 
   /* participate select */
   var ps=document.getElementById("p-prog");
