@@ -370,14 +370,9 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
 <!-- NEWS -->
 <section id="news" class="alt full"><div class="wrap">
   <div class="head"><div class="eyebrow">News &amp; Updates</div><h2>Latest from SIO</h2></div>
-  <div class="chips" role="tablist" aria-label="News type" data-tabs="news">
-    <button class="chip" role="tab" aria-selected="true" data-tab="ann">Announcements</button>
-    <button class="chip" role="tab" aria-selected="false" data-tab="art">Articles</button>
-    <button class="chip" role="tab" aria-selected="false" data-tab="evt">Events</button>
-  </div>
+
   <div role="tabpanel" data-panel="news" id="news-ann"><div class="grid" id="newsAnn"></div></div>
-  <div role="tabpanel" data-panel="news" id="news-art" hidden><div class="grid" id="newsArt"></div></div>
-  <div role="tabpanel" data-panel="news" id="news-evt" hidden><div class="grid" id="newsEvt"></div></div>
+  
 </div></section>
 
 <!-- IMPACT -->
@@ -595,8 +590,6 @@ function actCard(a){
   /* news */
   function newsCard(n){return el("div","card",'<span class="meta">'+esc(n.d)+'</span><h3>'+esc(n.t)+'</h3><p>'+esc(n.s)+'</p>')}
   NEWS.ann.forEach(function(n){document.getElementById("newsAnn").appendChild(newsCard(n))});
-  NEWS.art.forEach(function(n){document.getElementById("newsArt").appendChild(newsCard(n))});
-  NEWS.evt.forEach(function(n){document.getElementById("newsEvt").appendChild(newsCard(n))});
 
   /* about, impact */
   var ld=document.getElementById("leaders");
