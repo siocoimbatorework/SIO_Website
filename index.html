@@ -344,7 +344,7 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
 <section id="impact" class="wrap">
   <div class="head"><div class="eyebrow">Our Impact</div><h2>What our work has achieved</h2></div>
   <div class="chips">
-    <a class="chip" href="#nodes">Nodes</a><a class="chip" href="#achievements">Achievements</a><a class="chip" href="#statistics">Statistics</a><a class="chip" href="#reports">Annual Reports</a>
+    <a class="chip" href="#nodes">Nodes</a><a class="chip" href="#achievements">Achievements</a><a class="chip" href="#statistics">Statistics</a>
   </div>
 
   <div class="sub" id="nodes">
@@ -372,11 +372,7 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
       <div class="stat"><b>3500+</b><span>Sympathizers</span></div>
     </div>
   </div>
-
-  <div class="sub" id="reports">
-    <h3>Annual Reports</h3>
-    <ul class="reports" id="reportList"></ul>
-  </div>
+  
 </section>
 
 <!-- GET INVOLVED -->
@@ -571,8 +567,6 @@ function actCard(a){
 });
   var ng=document.getElementById("nodeGrid");
   NODES.forEach(function(n){ng.appendChild(el("div","card",'<h4>'+esc(n)+'</h4><span class="meta">[Add members and area]</span>'))});
-  var rl=document.getElementById("reportList");
-  REPORTS.forEach(function(r){rl.appendChild(el("li",null,'<b>'+esc(r)+'</b><span class="tag">Available on request</span>'))});
 
   /* participate select */
   var ps=document.getElementById("p-prog");
