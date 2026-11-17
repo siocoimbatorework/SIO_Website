@@ -192,6 +192,12 @@ a.card{text-decoration:none;color:inherit}
 .fp-facts li{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg-alt)}
 .fp-facts small{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
 @media(max-width:820px){.fp{grid-template-columns:1fr}.fp-body{padding:22px}}
+
+.card.node{display:flex;align-items:center;gap:14px;padding:16px 18px}
+.node-logo{flex:none;width:56px;height:56px;border-radius:12px;object-fit:contain;background:#fff;border:1px solid var(--line);padding:4px}
+.node-ph{display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:var(--green-ink);background:var(--sky-soft)}
+.card.node h4{min-width:0;overflow-wrap:break-word}
+
   
 /* progress */
 .prog{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
@@ -541,7 +547,16 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
     ann:[{t:"Registrations open for the Leadership Camp",d:"06th Dec 2026",s:"Join SIO Coimbatore's Investor Mission 2026 and explore the world of ethical, halal investing!"},{t:"Documenting Islamophobia on Campuses",d:"10 Nov 2026",s:"CERT has launched an online portal, inaugurated by Br. Abdul Hafeez, National President of SIO, to document and report incidents of Islamophobia across Indian campuses, promoting awareness and safer educational spaces."}],
   };
   var LEADERS=[["Ashik","District President","images/President.jpg"],["Anas Rahman","General Secretary","images/General-sec.jpeg"],["Hisham","Organisational secretary","images/org-secretary.jpeg"],["Ahammed Mishal V S","Finance Secretary","images/Finance-Secretary.jpg"]];
-  var NODES=["Track Force Sports Club [TFSC]","ALBAAB Islamic Academy","ECGC Education Career Guidance செல்","இளம்பிறை Children's Magazine","Sagotharan","NESAN","Happy Theater","GIO - Girls Islamic Organisation"];
+  var NODES=[
+  ["Track Force Sports Club [TFSC]","images/nodes/tfsc.png"],
+  ["ALBAAB Islamic Academy","images/nodes/albaab.png"],
+  ["ECGC Education Career Guidance செல்","images/nodes/ecgc.png"],
+  ["இளம்பிறை Children's Magazine","images/nodes/ilampirai.png"],
+  ["Sagotharan","images/nodes/sagotharan.png"],
+  ["NESAN","images/nodes/nesan.png"],
+  ["Happy Theater","images/nodes/ht.png"],
+  ["Kalam","images/nodes/kalam.png"]
+];
   
   function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
@@ -621,7 +636,11 @@ function actCard(a){
   ld.appendChild(el("div","card person",av+'<h4>'+esc(l[0])+'</h4><span class="meta">'+esc(l[1])+'</span>'));
 });
   var ng=document.getElementById("nodeGrid");
-  NODES.forEach(function(n){ng.appendChild(el("div","card",'<h4>'+esc(n)+'</h4>'))});
+  
+  NODES.forEach(function(n){
+  var logo=n[1]?'<img class="node-logo" src="'+esc(n[1])+'" alt="'+esc(n[0])+' logo" loading="lazy">':'<span class="node-logo node-ph">'+esc(n[0].charAt(0))+'</span>';
+  ng.appendChild(el("div","card node",logo+'<h4>'+esc(n[0])+'</h4>'));
+});
 
   /* participate select */
   var ps=document.getElementById("p-prog");
