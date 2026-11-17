@@ -512,19 +512,17 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
     upcoming:[{t:"Digital Skills Lab",s:"Computer and internet skills classes for students and parents.",p:0},{t:"Mentorship Network",s:"Matching first-year students with senior mentors.",p:0}]
   };
   var NEWS={
-    ann:[{t:"Registrations open for the Leadership Camp",d:"15 Nov 2026",s:"Limited places. Register through the Get Involved section."},{t:"New volunteer orientation",d:"10 Nov 2026",s:"New volunteers are invited to an introduction session."}],
-    art:[{t:"Why study circles still work",d:"2 Nov 2026",s:"A look at how small groups help students learn better and stay motivated."},{t:"Volunteering during exam season",d:"20 Oct 2026",s:"Practical ways to serve without falling behind in studies."}],
-    evt:[{t:"Annual Student Convention",d:"[Add date]",s:"A day of talks, exhibitions and awards for student achievers."},{t:"Career Guidance Day",d:"[Add date]",s:"Professionals meet final-year students for advice sessions."}]
+    ann:[{t:"Registrations open for the Leadership Camp",d:"06th Dec 2026",s:"Join SIO Coimbatore's Investor Mission 2026 and explore the world of ethical, halal investing!"},{t:"Documenting Islamophobia on Campuses",d:"10 Nov 2026",s:"CERT has launched an online portal, inaugurated by Br. Abdul Hafeez, National President of SIO, to document and report incidents of Islamophobia across Indian campuses, promoting awareness and safer educational spaces."}],
   };
   var LEADERS=[["Ashik","District President","images/President.jpg"],["Anas Rahman","General Secretary","images/General-sec.jpeg"],["Hisham","Organisational secretary","images/org-secretary.jpeg"],["Ahammed Mishal V S","Finance Secretary","images/Finance-Secretary.jpg"]];
   var NODES=["Track Force Sports Club [TFSC]","ALBAAB Islamic Academy","ECGC Education Career Guidance செல்","இளம்பிறை Children's Magazine","Sagotharan","NESAN","Happy Theater","GIO - Girls Islamic Organisation"];
   
+  function slider(photos,alt){
+  var box=el("div","slides"),n=0,t=null;
   function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
   
   /* New */
-  function slider(photos,alt){
-  var box=el("div","slides"),n=0,t=null;
   var imgs=photos.map(function(p,i){var im=document.createElement("img");im.src=p;im.alt=alt;im.loading="lazy";if(i===0)im.className="on";box.appendChild(im);return im});
   if(imgs.length>1){
     var dots=el("div","dots");imgs.forEach(function(_,i){dots.appendChild(el("i",i===0?"on":""))});box.appendChild(dots);
