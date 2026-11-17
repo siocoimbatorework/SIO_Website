@@ -149,7 +149,18 @@ a.card{text-decoration:none;color:inherit}
 .shot span{margin:8px;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,.92);color:#10241A;font-size:.82rem;font-weight:600}
 .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .shot span{position:relative;z-index:1}
-
+  
+/* New */
+.slides{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:12px;overflow:hidden;background:var(--sky-soft);border:1px solid var(--line)}
+.slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s ease}
+.slides img.on{opacity:1}
+.slides .dots{position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:6px;z-index:2}
+.slides .dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.6)}
+.slides .dots i.on{background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+.shot .slides{position:absolute;inset:0;aspect-ratio:auto;border:0;border-radius:0}
+.shot .dots{display:none}
+@media(prefers-reduced-motion:reduce){.slides img{transition:none}}
+  
 /* progress */
 .prog{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
 .prog i{display:block;height:100%;background:linear-gradient(90deg,var(--sky),var(--green))}
@@ -456,7 +467,7 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
 <script>
 (function(){
   var ACT=[
-    {id:1,cat:"Education",title:"Study Circle Series",date:"Every Saturday",place:"Central node",sum:"Weekly guided study and discussion for school and college students.",det:"Students meet in small groups for guided reading, exam preparation help and open discussion. Senior members mentor younger ones. Open to all students."},
+    {id:1,photos:["images/Informix1.jpg","images/Informix2.jpg","images/Informix3.jpg"],cat:"Education",title:"Study Circle Series",date:"April 2026",place:"Central node",sum:"INFORMIX empowered students with career guidance, awareness and insights to build a brighter future.",det:"SIO Coimbatore organised INFORMIX, a career guidance programme at Hidhaya Campus, with the aim of helping students make informed decisions about their future. The programme witnessed enthusiastic participation from a large number of students, who gained valuable insights into various career opportunities and pathways. Through meaningful guidance and awareness, the initiative helped students explore their potential, understand their options and approach their future with greater confidence. The positive response from participants made INFORMIX a valuable and impactful initiative in empowering young minds."},
     {id:2,cat:"Community Service",title:"Blood Donation Camp",date:"Twice a year",place:"Partner hospital",sum:"Volunteer-run camp with medical teams from partner hospitals.",det:"Members register donors, manage the venue and follow up with donors afterwards. Qualified medical staff run the collection."},
     {id:3,cat:"Youth Leadership",title:"Leadership Camp",date:"Semester break",place:"Residential venue",sum:"Three days of training in public speaking, teamwork and organising.",det:"Participants take part in workshops, group projects and a community service task, and finish by planning an initiative for their own campus."},
     {id:4,cat:"Spiritual & Character",title:"Character Building Workshops",date:"Monthly",place:"Local nodes",sum:"Discussions on honesty, responsibility and respect in student life.",det:"Short facilitated sessions using stories, case studies and group reflection. Parents and teachers are welcome to attend."},
@@ -480,22 +491,39 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
 
   function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-
+  
+  /* New */
+  function slider(photos,alt){
+  var box=el("div","slides"),n=0,t=null;
+  var imgs=photos.map(function(p,i){var im=document.createElement("img");im.src=p;im.alt=alt;im.loading="lazy";if(i===0)im.className="on";box.appendChild(im);return im});
+  if(imgs.length>1){
+    var dots=el("div","dots");imgs.forEach(function(_,i){dots.appendChild(el("i",i===0?"on":""))});box.appendChild(dots);
+    var show=function(k){imgs[n].classList.remove("on");dots.children[n].classList.remove("on");n=k%imgs.length;imgs[n].classList.add("on");dots.children[n].classList.add("on")};
+    var start=function(){if(t||matchMedia("(prefers-reduced-motion: reduce)").matches)return;t=setInterval(function(){show(n+1)},3500+Math.random()*800)};
+    var stop=function(){clearInterval(t);t=null};
+    start();box.addEventListener("mouseenter",stop);box.addEventListener("mouseleave",start);box.stop=stop;
+  }
+  return box;
+}
+  
   /* activities */
   var dlg=document.getElementById("dlg"),dlgBody=document.getElementById("dlgBody");
   function openAct(a){
-    dlgBody.innerHTML='<div class="thumb"><b>sio</b></div><span class="tag">'+esc(a.cat)+'</span><h3>'+esc(a.title)+'</h3>'+
-      '<p class="meta" style="color:var(--muted);font-weight:600">'+esc(a.date)+' · '+esc(a.place)+'</p><p>'+esc(a.det)+'</p>'+
-      '<div class="dl-row"><a class="btn" href="#involved" id="dlgJoin">Take part</a><button class="btn" style="background:transparent;color:var(--fg);border-color:var(--line)" id="dlgClose">Close</button></div>';
-    dlg.showModal();
-    document.getElementById("dlgClose").onclick=function(){dlg.close()};
-    document.getElementById("dlgJoin").onclick=function(){dlg.close()};
-  }
-  dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
-  function actCard(a){
-    var b=el("button","card",'<div class="thumb"><b>sio</b></div><span class="tag">'+esc(a.cat)+'</span><h3>'+esc(a.title)+'</h3><p>'+esc(a.sum)+'</p><span class="meta">'+esc(a.date)+'</span>');
-    b.type="button";b.onclick=function(){openAct(a)};return b;
-  }
+  var old=dlgBody.querySelector(".slides");if(old&&old.stop)old.stop();
+  dlgBody.innerHTML='<span class="tag">'+esc(a.cat)+'</span><h3>'+esc(a.title)+'</h3>'+
+    '<p class="meta" style="color:var(--muted);font-weight:600">'+esc(a.date)+' · '+esc(a.place)+'</p><p>'+esc(a.det)+'</p>'+
+    '<div class="dl-row"><a class="btn" href="#involved" id="dlgJoin">Take part</a><button class="btn" style="background:transparent;color:var(--fg);border-color:var(--line)" id="dlgClose">Close</button></div>';
+  dlgBody.insertBefore(a.photos&&a.photos.length?slider(a.photos,a.title):el("div","thumb",'<b>sio</b>'),dlgBody.firstChild);
+  dlg.showModal();
+  document.getElementById("dlgClose").onclick=function(){dlg.close()};
+  document.getElementById("dlgJoin").onclick=function(){dlg.close()};
+}
+dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
+function actCard(a){
+  var b=el("button","card",'<span class="tag">'+esc(a.cat)+'</span><h3>'+esc(a.title)+'</h3><p>'+esc(a.sum)+'</p><span class="meta">'+esc(a.date)+'</span>');
+  b.insertBefore(a.photos&&a.photos.length?slider(a.photos,a.title):el("div","thumb",'<b>sio</b>'),b.firstChild);
+  b.type="button";b.onclick=function(){openAct(a)};return b;
+}
   var feat=document.getElementById("featuredGrid");
   [ACT[0],ACT[2],ACT[1]].forEach(function(a){feat.appendChild(actCard(a))});
   var grid=document.getElementById("actGrid"),chips=document.getElementById("catChips"),cur="All";
