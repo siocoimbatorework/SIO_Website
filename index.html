@@ -746,17 +746,11 @@ card.onclick = function() {
       '<h3>' + esc(n[0]) + '</h3>' +
     '</div>' +
     '<p>' + esc(n[2]) + '</p>';
+  
+    dlg.classList.add("node-glass");
+    dlg.showModal();
 
-  var savedScrollPosition = window.scrollY;
-
- dlg.classList.add("node-glass");
- dlg.showModal();
-
- dlg.focus({ preventScroll: true });
-
- window.scrollTo(0, savedScrollPosition);
-
-  document.getElementById("nodeClose").onclick = function() {
+    document.getElementById("nodeClose").onclick = function() {
     dlg.close();
   };
 };
