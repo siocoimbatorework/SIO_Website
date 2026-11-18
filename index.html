@@ -597,7 +597,7 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
   </div>
 </footer>
 
-<dialog id="dlg" aria-labelledby="dlgTitle">
+<dialog id="dlg" aria-labelledby="dlgTitle" tabindex="-1" autofocus>
   <button type="button" class="node-close" id="nodeClose" aria-label="Close">&times;</button>
   <div class="dlg" id="dlgBody"></div>
 </dialog>
@@ -747,8 +747,14 @@ card.onclick = function() {
     '</div>' +
     '<p>' + esc(n[2]) + '</p>';
 
-  dlg.classList.add("node-glass");
-  dlg.showModal();
+  var savedScrollPosition = window.scrollY;
+
+ dlg.classList.add("node-glass");
+ dlg.showModal();
+
+ dlg.focus({ preventScroll: true });
+
+ window.scrollTo(0, savedScrollPosition);
 
   document.getElementById("nodeClose").onclick = function() {
     dlg.close();
