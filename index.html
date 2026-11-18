@@ -839,7 +839,7 @@ dlg.addEventListener("close", function() {
   });
 
   /* forms: connecting to mailbox */
-  var FORM_ENDPOINT="PASTE-YOUR-WEB-APP-URL-HERE";
+  var FORM_ENDPOINT="https://script.google.com/macros/s/AKfycbw9Pm6IFRQYfbQMqrjmPuVTq9IDfDX6dqO1Mh5yyKjsa9xV5EJwwpr9-XpJLpyeIDs/exec";
   document.querySelectorAll("form[data-form]").forEach(function(f){
   var hp=document.createElement("input");hp.name="hp";hp.tabIndex=-1;hp.autocomplete="off";hp.setAttribute("aria-hidden","true");
   hp.style.cssText="position:absolute;left:-9999px;width:1px;height:1px;opacity:0";f.appendChild(hp);
