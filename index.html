@@ -831,15 +831,34 @@ dlg.addEventListener("close", function() {
     });
   });
 
-  /* forms: not connected to any mailbox yet */
+  /* forms: connecting to mailbox */
+  var FORM_ENDPOINT="PASTE-YOUR-WEB-APP-URL-HERE";
   document.querySelectorAll("form[data-form]").forEach(function(f){
-    f.addEventListener("submit",function(e){
-      e.preventDefault();
-      var ok=f.querySelector(".ok");
-      ok.hidden=false;
-      ok.textContent="Thank you. This form is not connected to an inbox yet, so nothing has been sent.";
+  var hp=document.createElement("input");hp.name="hp";hp.tabIndex=-1;hp.autocomplete="off";hp.setAttribute("aria-hidden","true");
+  hp.style.cssText="position:absolute;left:-9999px;width:1px;height:1px;opacity:0";f.appendChild(hp);
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var ok=f.querySelector(".ok"),btn=f.querySelector("button[type=submit]");
+    ok.hidden=false;
+    if(FORM_ENDPOINT.indexOf("PASTE")===0){ok.textContent="This form is not connected yet.";return}
+    var body=new URLSearchParams();body.append("form",f.getAttribute("data-form"));
+    f.querySelectorAll("input,select,textarea").forEach(function(c){
+      if(c.name==="hp"){body.append("hp",c.value);return}
+      var l=c.closest("label");
+      body.append(l?l.firstChild.textContent.trim():c.id,c.value);
     });
+    ok.textContent="Sending...";btn.disabled=true;
+    fetch(FORM_ENDPOINT,{method:"POST",body:body})
+      .then(function(r){return r.json()})
+      .then(function(j){
+        if(!j.ok)throw new Error(j.error||"failed");
+        ok.textContent="Thank you. We have received your response and will contact you soon.";
+        f.reset();
+      })
+      .catch(function(){ok.textContent="Sorry, something went wrong. Please try again or contact us by email."})
+      .finally(function(){btn.disabled=false});
   });
+});
 
   /* menu and theme */
   var nav=document.getElementById("nav"),mb=document.getElementById("menuBtn");
