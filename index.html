@@ -204,7 +204,8 @@ a.card{text-decoration:none;color:inherit}
 .recog a{font-weight:700}
 
 .band-sky{position:relative;overflow:hidden}
-.band-sky::before{content:"";position:absolute;inset:0;background:url("images/formationday.jpg") center 62%/cover no-repeat;opacity:.28}
+.band-sky::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:min(100%,1400px);transform:translateX(-50%);background:url("images/formationday.jpg") center 62%/cover no-repeat;opacity:.28;-webkit-mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent)}
+@media(max-width:900px){.band-sky::before{-webkit-mask-image:none;mask-image:none}}
 .band-sky>.wrap{position:relative;z-index:1}
   
 /* progress */
