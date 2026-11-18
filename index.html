@@ -493,6 +493,42 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
   }
 }
 
+/* Force two-column hero layout */
+.band-sky .hero-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.2fr) minmax(350px, 0.8fr);
+  align-items: center;
+  gap: 45px;
+}
+
+.band-sky .hero-copy {
+  min-width: 0;
+}
+
+.band-sky .quran-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+}
+
+.band-sky .quran-glass {
+  width: 100%;
+  max-width: 430px;
+}
+
+@media (max-width: 760px) {
+  .band-sky .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .band-sky .quran-wrap {
+    justify-content: center;
+  }
+}
   
 </style>
 </head>
