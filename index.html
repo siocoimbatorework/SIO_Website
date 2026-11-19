@@ -208,7 +208,8 @@ a.card{text-decoration:none;color:inherit}
 @media(max-width:900px){.band-sky::before{-webkit-mask-image:none;mask-image:none}}
 .band-sky>.wrap{position:relative;z-index:1}
 .brand img{flex:none;border-radius:50%}
-
+  
+.privacy{font-size:.82rem;color:var(--muted);margin:0}
   
 /* progress */
 .prog{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
@@ -845,6 +846,8 @@ dlg.addEventListener("close", function() {
   document.querySelectorAll("form[data-form]").forEach(function(f){
   var hp=document.createElement("input");hp.name="hp";hp.tabIndex=-1;hp.autocomplete="off";hp.setAttribute("aria-hidden","true");
   hp.style.cssText="position:absolute;left:-9999px;width:1px;height:1px;opacity:0";f.appendChild(hp);
+  var pv=document.createElement("p");pv.className="privacy";pv.textContent="We use your details only to contact you.";
+  f.insertBefore(pv,f.querySelector(".ok"));
   f.addEventListener("submit",function(e){
     e.preventDefault();
     var ok=f.querySelector(".ok"),btn=f.querySelector("button[type=submit]");
