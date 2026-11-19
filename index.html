@@ -173,8 +173,8 @@ a.card{text-decoration:none;color:inherit}
 @keyframes spotpulse{50%{opacity:.25}}
 .spot h2{font-size:clamp(2rem,5vw,3.4rem);color:#fff}
 .spot p{color:#E3F0E6;font-size:1.1rem}
-.spot .spot-follow{color:var(--sky);font-weight:700}
 
+  
 .spot-facts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,2.2fr);gap:12px;margin:0;padding:0;list-style:none}
 @media(max-width:700px){.spot-facts{grid-template-columns:1fr 1fr}.spot-facts li:last-child{grid-column:1/-1}}
   
@@ -182,7 +182,6 @@ a.card{text-decoration:none;color:inherit}
 .spot-facts small{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);font-weight:700}
 .spot-facts b{font-size:1.05rem;overflow-wrap:break-word}
 @media(prefers-reduced-motion:reduce){.spot-pill i{animation:none}}
-.spot .spot-follow a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 
 .fp{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);margin-top:32px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card)}
 .fp img{display:block;width:100%;height:100%;min-height:280px;object-fit:cover;object-position:center top}
@@ -210,6 +209,10 @@ a.card{text-decoration:none;color:inherit}
 .brand img{flex:none;border-radius:50%}
   
 .privacy{font-size:.82rem;color:var(--muted);margin:0}
+
+.spot .spot-follow{display:block;width:fit-content;max-width:100%;padding:10px 18px;border-radius:20px;line-height:1.5;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);color:#fff;font-weight:500;text-decoration:none;transition:background .2s}
+.spot .spot-follow b{color:var(--sky)}
+.spot .spot-follow:hover{background:rgba(255,255,255,.22)}
   
 /* progress */
 .prog{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
@@ -310,29 +313,6 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
   transform: rotate(90deg);
 }
 
-  .spot-follow {
-  margin-top: 20px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #dcefe2 !important;
-}
-
-.spot-follow a,
-.spot-follow a:visited {
-  color: #ffffff !important;
-  text-decoration: none !important;
-  font-weight: 700;
-  border-bottom: 1px solid rgba(255,255,255,0.6);
-  padding-bottom: 3px;
-  transition: 0.3s ease;
-}
-
-.spot-follow a:hover {
-  color: #a3f76b !important;
-  border-color: #a3f76b;
-}
-
-
 /* Nodes popup text */
 #dlg.node-glass #dlgBody {
   color: #ffffff !important;
@@ -429,13 +409,7 @@ footer .fine{margin-top:30px;font-size:.85rem;opacity:.85;border-top:1px solid r
         <li><small>Time</small><b>10:00 AM - 1:00 PM</b></li>
         <li><small>Venue</small><b>Siruthuli Noyyal Life Centre, Sungam Bypass Road, Ramanathapuram, Coimbatore</b></li>
       </ul>
-      <p class="spot-follow">
-      <a href="https://www.instagram.com/sio_coimbatore"
-     target="_blank" rel="noopener">
-    <i class="fab fa-instagram"></i> Follow @sio_coimbatore
-  </a>
-  <span> for event updates.</span>
-</p>
+      <a class="spot-follow" href="https://www.instagram.com/sio_coimbatore/" target="_blank" rel="noopener">Follow <b>@sio_coimbatore</b> for event updates <span aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
 </section>
